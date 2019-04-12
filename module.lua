@@ -46,6 +46,22 @@ local Slider = {}
 	end
 	
 	
+	function Slider:Set(value, do_tween)
+		value = math.clamp(value, self.Min, self.Max)
+		self.Value = value
+		
+		local percent = (value - self.Min) / (self.Max - self.Min)
+		
+		
+		self:Update(percent)
+		
+		if do_tween then
+			self.Slider:TweenPosition(UDim2.new(percent,0,.5,0), "Out", "Linear", .5, true)
+		else
+			self.Slider.Position = UDim2.new(percent,0,.5,0)
+		end
+	end
+	
 	function Slider:Update(percent)
 		local old_val = self.Value
 		local new_val = self.Min + ((self.Max - self.Min) * percent)
