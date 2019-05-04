@@ -81,6 +81,9 @@ local Slider = {}
 		local bar = self.Bar
 		local slider = self.Slider
 		local bar_size = bar.AbsoluteSize
+		bar:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+			bar_size = bar.AbsoluteSize
+		end)
 		local b_i_b = bar.InputBegan:Connect(function(io)
 			if io.UserInputType == Enum.UserInputType.MouseButton1 or io.UserInputType == Enum.UserInputType.Touch then
 				self.Listening = true
